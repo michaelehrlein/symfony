@@ -458,7 +458,8 @@ class ClassMetadata extends GenericMetadata implements ClassMetadataInterface
     private function addPropertyMetadata(PropertyMetadataInterface $metadata): void
     {
         $property = $metadata->getPropertyName();
-        $this->members[$property][spl_object_id($metadata)] = $metadata;
+        $this->members[$property][] = $metadata;
+        $this->members[$property] = array_values(array_unique($this->members[$property]));
     }
 
     private function checkConstraint(Constraint $constraint): void
